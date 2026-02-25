@@ -1,0 +1,31 @@
+<OPEN IN THE PREVIEW>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body { font-family: sans-serif; background: #dcfce7; padding: 15px; border-radius: 8px; }
+        #display { font-weight: bold; color: #064e3b; }
+    </style>
+</head>
+<body>
+    <h3>L.ide Example Project</h3>
+    <p>Received message: <span id="display">...</span></p>
+    
+    <input type="text" id="sheepInput" placeholder="Send a message...">
+    <button onclick="sendToShepherd()">Send message (check the bottom right corner)</button>
+
+    <script>
+        // Listen for messages from the parent
+        window.addEventListener('message', (event) => {
+            document.getElementById('display').textContent = event.data;
+        });
+
+        function sendToShepherd() {
+            const reply = document.getElementById('sheepInput').value;
+            // Use window.parent to send message back to the top window
+            window.parent.postMessage(reply, '*');
+        }
+    </script>
+</body>
+</html>
